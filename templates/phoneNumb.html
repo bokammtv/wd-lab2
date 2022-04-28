@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1 class="my-5">
+    Форматирование номера телефона
+</h1>
+
+<form method="POST" name="number">
+    <div class="form-group">
+        <label for="number">Номер телефона:</label>
+        <input type="text" id="number" name="number" class="form-control {% if err_msg %}is-invalid {% endif %}" value="{% if err_msg%}{{ request.form.number }}{% else %}{{ result }}{% endif %}">
+        {% if err_msg %}
+        <div class="invalid-feedback">{{ err_msg }}</div>
+        {% endif %}
+    </div>
+    <div class="form-group text-center">
+        <input type="submit" value="Отправить" class="btn btn-primary m-3">
+    </div>
+    
+</form>
+
+{% endblock %}

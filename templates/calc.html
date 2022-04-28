@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1 class="my-5">
+    Калькулятор
+</h1>
+
+<form class="row g-3">
+    <div class="col-auto">
+        <input type="text" name="operand1" class="form-control mr-2" value="{{ request.args.get('operand1', '') }}">
+    </div>
+    <div class="col-auto">
+        <select name="operation" id="operation" class="form-control mr-2">
+            {% for operation in operations %}
+            <option {% if request.args.get('operation') == operation %}selected{% endif %}>{{ operation }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="col-auto">
+        <input type="text" name="operand2" class="form-control mr-2" value="{{ request.args.get('operand2', '') }}">
+    </div>
+    <div class="col-auto">
+        <button type="submit" class="btn btn-primary mr-2">=</button>
+    </div>
+    {% if result %}
+    <div class="col-auto">
+        <input type="text" name="operand1" class="form-control mr-2" value="{{ result }}" disabled>
+    </div>
+    {% endif %}
+</form>
+
+{% if error_msg %}
+<p style="color: red;">{{ error_msg }}</p>
+{% endif %}
+
+{% endblock %}
